@@ -1,4 +1,4 @@
-#LeiloesTDSat
+LeiloesTDSat
 
 Descrição do Projeto 
 
