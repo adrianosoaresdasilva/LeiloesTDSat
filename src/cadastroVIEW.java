@@ -149,22 +149,18 @@ public class cadastroVIEW extends javax.swing.JFrame {
         String nome = cadastroNome.getText();
         String valor = cadastroValor.getText();
         String status = "A Venda";
+
         produto.setNome(nome);
         produto.setValor(Integer.parseInt(valor));
         produto.setStatus(status);
 
         ProdutosDAO produtodao = new ProdutosDAO();
-        boolean sucesso = produtodao.cadastrarProduto(produto); // Recebe o resultado do cadastro
+        produtodao.cadastrarProduto(produto); // Chama o método sem retorno
 
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
-            cadastroNome.setText(""); // Limpa o campo nome
-            cadastroValor.setText(""); // Limpa o campo valor
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar produto.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        // Após cadastrar, limpa os campos
+        cadastroNome.setText("");
+        cadastroValor.setText("");
 
-    
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
