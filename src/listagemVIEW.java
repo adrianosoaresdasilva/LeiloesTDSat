@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -137,17 +138,28 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
+       String id = id_produto_venda.getText();
+
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, insira o ID do produto.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return; // Impede a execução se o ID estiver vazio
+    }
+
+    try {
+        int idProduto = Integer.parseInt(id);
         ProdutosDAO produtosdao = new ProdutosDAO();
-        
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        produtosdao.venderProduto(idProduto);
+        listarProdutos(); // Atualiza a tabela
+        id_produto_venda.setText(""); // Limpa o campo de ID
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "ID do produto inválido. Insira um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        TelaVendas vendas = new TelaVendas(); 
+        vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
